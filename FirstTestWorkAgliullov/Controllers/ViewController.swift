@@ -21,18 +21,19 @@ class ViewController: UIViewController {
     //---Задание 6
     fileprivate var arrayInt = [18, 7, 3, 65, 12, 4, 9, 2, 73, 10]
     //---Задание 7
-    fileprivate var trashString: String = "abc123"
+    fileprivate var trashString: String = "abc999"
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.halfSummTwoNumber()
-        self.printFullName()
-        self.printOptionalNumber(number: self.firstFloat)
-        self.printOptionalNumber(number: self.secondFloat)
-        self.printFibonacciNumber()
-        self.bubbleSort(self.arrayInt)
-        self.replaceLastCharacterString(trashString: self.trashString)
+        self.view.backgroundColor = UIColor.green
+        halfSummTwoNumber()
+        printFullName()
+        printOptionalNumber(number: self.firstFloat)
+        printOptionalNumber(number: self.secondFloat)
+        printFibonacciNumber()
+        bubbleSort(self.arrayInt)
+        replaceLastCharacterString(trashString: self.trashString)
     }
     
     //MARK: - Задание 2
@@ -85,11 +86,11 @@ class ViewController: UIViewController {
     
     //MARK: - Задание 7
     func replaceLastCharacterString(trashString: String) {
-        guard let lastCharacter = trashString.last?.description, let lastNumber = Int(lastCharacter) else {
+        guard let number = Int(trashString.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()) else {
             return print("Can't serialize last character in number")
         }
-        let numberPlusOne: Int = lastNumber + 1
-        let replaceString: String = String(trashString.dropLast()) + "\(numberPlusOne)"
+        let numberPlusOne: Int = number + 1
+        let replaceString: String = trashString.replacingOccurrences(of: number.description, with: numberPlusOne.description)
         print(replaceString)
     }
 }
