@@ -1,5 +1,5 @@
 //
-//  UserController.swift
+//  UserViewController.swift
 //  FirstTestWorkAgliullov
 //
 //  Created by Раис Аглиуллов on 13.07.2020.
@@ -14,7 +14,5 @@ class UserViewController: UIViewController {
         super.viewDidLoad()
         self.title = "Профиль"
         self.view.backgroundColor = UIColor.gray
-              
     }
-    
 }

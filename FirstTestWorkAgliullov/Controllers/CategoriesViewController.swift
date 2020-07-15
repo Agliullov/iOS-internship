@@ -1,5 +1,5 @@
 //
-//  NewsViewController.swift
+//  HelpViewController.swift
 //  FirstTestWorkAgliullov
 //
 //  Created by Раис Аглиуллов on 13.07.2020.
@@ -8,11 +8,12 @@
 
 import UIKit
 
-class NewsViewController: UIViewController {
+class HelpViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Новости"
-        self.view.backgroundColor = UIColor.yellow
+        self.title = "Помочь"
+        self.view.backgroundColor = UIColor.white
+        
     }
 }

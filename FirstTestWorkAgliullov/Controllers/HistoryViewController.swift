@@ -1,5 +1,5 @@
 //
-//  HistoryController.swift
+//  HistoryViewController.swift
 //  FirstTestWorkAgliullov
 //
 //  Created by Раис Аглиуллов on 13.07.2020.
@@ -8,13 +8,11 @@
 
 import UIKit
 
-class HistoryController: UIViewController {
+class HistoryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "История"
         self.view.backgroundColor = UIColor.orange
-              
     }
-    
 }

@@ -1,5 +1,5 @@
 //
-//  SearchController.swift
+//  SearchViewController.swift
 //  FirstTestWorkAgliullov
 //
 //  Created by Раис Аглиуллов on 13.07.2020.
@@ -14,7 +14,5 @@ class SearchViewController: UIViewController {
         super.viewDidLoad()
         self.title = "Поиск"
         self.view.backgroundColor = UIColor.purple
-              
     }
-    
 }
