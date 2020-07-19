@@ -8,17 +8,19 @@
 
 import UIKit
 
+let COLLECTION_HEADER_HEIGHT: CGFloat = 50
+
 struct CategoryDataSourse{
     let imageName: String
     let title: String
     
     static func dataSourse() -> [CategoryDataSourse] {
         let dataSourse = [
-            CategoryDataSourse.init(imageName: "Young", title: "Дети"),
-            CategoryDataSourse.init(imageName: "Normal", title: "Взрослые"),
-            CategoryDataSourse.init(imageName: "OldMen", title: "Пожилые"),
+            CategoryDataSourse.init(imageName: "Kids", title: "Дети"),
+            CategoryDataSourse.init(imageName: "Adults", title: "Взрослые"),
+            CategoryDataSourse.init(imageName: "Elderly", title: "Пожилые"),
             CategoryDataSourse.init(imageName: "Animals", title: "Животные"),
-            CategoryDataSourse.init(imageName: "Event", title: "Мероприятия")
+            CategoryDataSourse.init(imageName: "Events", title: "Мероприятия")
         ]
         return dataSourse
     }
@@ -28,27 +30,29 @@ class HelpViewController: UIViewController {
     
     @IBOutlet weak var helpCenterCollectionView: UICollectionView!
     
+    private let titleCellIdentifier: String = "CategoryCollectionHeaderCell"
     private let cellIdentifier: String = "HelpCenterCollectionCell"
     private let dataSourse: [CategoryDataSourse] = CategoryDataSourse.dataSourse()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Помочь"
         self.view.backgroundColor = UIColor.white
         
-        let textColorAttribute = [NSAttributedString.Key.font: UIFont(name: "Palatino-Bold", size: 21)!, NSAttributedString.Key.foregroundColor: UIColor.white]
+        let textColorAttribute = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 21.0), NSAttributedString.Key.foregroundColor: UIColor.white]
         self.navigationController?.navigationBar.titleTextAttributes = textColorAttribute
         
-        self.navigationItem.setLeftBarButton(UIBarButtonItem(image: UIImage(named: "rectangle"), style: .done, target: nil, action: nil), animated: true)
+        self.navigationItem.setLeftBarButton(UIBarButtonItem(image: UIImage(named: "rectangle"), style: .done, target: self, action: #selector(exitApp)), animated: true)
         
         self.helpCenterCollectionView.delegate = self
         self.helpCenterCollectionView.dataSource = self
         
         self.helpCenterCollectionView.register(CategoryCollectionCell.self, forCellWithReuseIdentifier: self.cellIdentifier)
-        
-        // let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        //layout.itemSize = CGSize(width: self.view.frame.width / 2 - 15, height: self.view.frame.height / 5)
+        self.helpCenterCollectionView.register(CategoryCollectionHeaderCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: titleCellIdentifier)
+    }
+    
+    @objc func exitApp() {
+        UIControl().sendAction(#selector((NSXPCConnection.suspend)), to: UIApplication.shared, for: nil)
     }
 }
 
@@ -68,14 +72,17 @@ extension HelpViewController: UICollectionViewDataSource, UICollectionViewDelega
         return UICollectionViewCell()
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let size = CGSize(width: self.view.frame.width / 2 - 15, height: self.view.frame.height / 5)
-        return size
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        switch kind {
+        case UICollectionView.elementKindSectionHeader:
+            let reusableCell = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: self.titleCellIdentifier, for: indexPath) as! CategoryCollectionHeaderCell
+            return reusableCell
+        default:
+            fatalError("Not implemented")
+        }
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        let inset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-        return inset
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: self.view.bounds.width, height: COLLECTION_HEADER_HEIGHT)
     }
-    
 }

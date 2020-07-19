@@ -15,6 +15,7 @@
 		B9080F7724B7149500CA95DF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9080F7524B7149500CA95DF /* LaunchScreen.storyboard */; };
 		B9080F7F24B74CD700CA95DF /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = B9080F7E24B74CD700CA95DF /* .gitignore */; };
 		B922FEA124BCE7DF002A1B05 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B922FEA024BCE7DF002A1B05 /* StartViewController.swift */; };
+		B956FA9424C0E0E000EBD007 /* CategoryCollectionHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B956FA9324C0E0E000EBD007 /* CategoryCollectionHeaderCell.swift */; };
 		B963551624BCF0F200884A8A /* CategoryCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B963551524BCF0F200884A8A /* CategoryCollectionCell.swift */; };
 		B9A9CCE124BC8BB2008483BB /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A9CCE024BC8BB2008483BB /* HelpViewController.swift */; };
 		B9E3726224BC932F007D4BE6 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E3726124BC932F007D4BE6 /* NewsViewController.swift */; };
@@ -34,6 +35,7 @@
 		B9080F7824B7149500CA95DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B9080F7E24B74CD700CA95DF /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		B922FEA024BCE7DF002A1B05 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
+		B956FA9324C0E0E000EBD007 /* CategoryCollectionHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionHeaderCell.swift; sourceTree = "<group>"; };
 		B963551524BCF0F200884A8A /* CategoryCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionCell.swift; sourceTree = "<group>"; };
 		B9A9CCE024BC8BB2008483BB /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		B9E3726124BC932F007D4BE6 /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				B963551524BCF0F200884A8A /* CategoryCollectionCell.swift */,
+				B956FA9324C0E0E000EBD007 /* CategoryCollectionHeaderCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -188,6 +191,7 @@
 				B922FEA124BCE7DF002A1B05 /* StartViewController.swift in Sources */,
 				B9A9CCE124BC8BB2008483BB /* HelpViewController.swift in Sources */,
 				B9E3726224BC932F007D4BE6 /* NewsViewController.swift in Sources */,
+				B956FA9424C0E0E000EBD007 /* CategoryCollectionHeaderCell.swift in Sources */,
 				B9080F6D24B7149400CA95DF /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -343,7 +347,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = Rain.FirstTestWorkAgliullov;
 				PRODUCT_NAME = "Хочу помочь";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -362,7 +366,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = Rain.FirstTestWorkAgliullov;
 				PRODUCT_NAME = "Хочу помочь";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

@@ -56,16 +56,17 @@
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="10"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HelpCenterCollectionCell" id="0Cr-iR-AQZ" customClass="CategoryCollectionCell" customModule="Хочу_помочь" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                        <rect key="frame" x="10" y="10" width="128" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="gty-rr-0m9">
                                             <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </collectionViewCellContentView>
+                                        <size key="customSize" width="128" height="128"/>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -120,21 +121,6 @@
             </objects>
             <point key="canvasLocation" x="477" y="1647"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="f22-Za-IQB">
-            <objects>
-                <viewController id="iuo-r9-cVC" customClass="ViewController" customModule="Хочу_помочь" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="XyF-bv-NiR">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="ex3-c3-fQ7"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="uSF-em-Zre" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1604" y="-186"/>
-        </scene>
         <!--Start View Controller-->
         <scene sceneID="l80-dt-dqD">
             <objects>
@@ -142,7 +128,7 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="udS-s4-h43">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
                         <segue destination="OLg-tP-tmL" kind="relationship" relationship="viewControllers" id="hs7-EW-ZrY"/>
@@ -160,7 +146,7 @@
         <scene sceneID="qJY-tq-yTa">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="N6i-Tm-U5h" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Помочь" image="heart" id="l3i-L1-Qwr"/>
+                    <tabBarItem key="tabBarItem" title="Помочь" id="l3i-L1-Qwr"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="sQT-Jp-dcq">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -180,7 +166,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="heart" width="24" height="24"/>
         <image name="iconGreyHistory" width="25" height="25"/>
         <image name="iconGreyProfile" width="25" height="25"/>
         <image name="iconNewsGrey" width="25" height="25"/>
