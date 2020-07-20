@@ -124,7 +124,7 @@
         <!--Start View Controller-->
         <scene sceneID="l80-dt-dqD">
             <objects>
-                <tabBarController id="VcT-Eo-n4b" customClass="StartViewController" customModule="Хочу_помочь" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="StartViewController" id="VcT-Eo-n4b" customClass="StartViewController" customModule="Хочу_помочь" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="udS-s4-h43">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

@@ -13,7 +13,6 @@
 		B9080F7224B7149400CA95DF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9080F7024B7149400CA95DF /* Main.storyboard */; };
 		B9080F7424B7149500CA95DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9080F7324B7149500CA95DF /* Assets.xcassets */; };
 		B9080F7724B7149500CA95DF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9080F7524B7149500CA95DF /* LaunchScreen.storyboard */; };
-		B9080F7F24B74CD700CA95DF /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = B9080F7E24B74CD700CA95DF /* .gitignore */; };
 		B922FEA124BCE7DF002A1B05 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B922FEA024BCE7DF002A1B05 /* StartViewController.swift */; };
 		B956FA9424C0E0E000EBD007 /* CategoryCollectionHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B956FA9324C0E0E000EBD007 /* CategoryCollectionHeaderCell.swift */; };
 		B963551624BCF0F200884A8A /* CategoryCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B963551524BCF0F200884A8A /* CategoryCollectionCell.swift */; };
@@ -33,7 +32,6 @@
 		B9080F7324B7149500CA95DF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B9080F7624B7149500CA95DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B9080F7824B7149500CA95DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B9080F7E24B74CD700CA95DF /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		B922FEA024BCE7DF002A1B05 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		B956FA9324C0E0E000EBD007 /* CategoryCollectionHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionHeaderCell.swift; sourceTree = "<group>"; };
 		B963551524BCF0F200884A8A /* CategoryCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionCell.swift; sourceTree = "<group>"; };
@@ -58,7 +56,6 @@
 		B9080F5E24B7149400CA95DF = {
 			isa = PBXGroup;
 			children = (
-				B9080F7E24B74CD700CA95DF /* .gitignore */,
 				B9080F6924B7149400CA95DF /* FirstTestWorkAgliullov */,
 				B9080F6824B7149400CA95DF /* Products */,
 			);
@@ -168,7 +165,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B9080F7F24B74CD700CA95DF /* .gitignore in Resources */,
 				B9080F7724B7149500CA95DF /* LaunchScreen.storyboard in Resources */,
 				B9080F7424B7149500CA95DF /* Assets.xcassets in Resources */,
 				B9080F7224B7149400CA95DF /* Main.storyboard in Resources */,
@@ -339,7 +335,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U2N97D98Q8;
 				INFOPLIST_FILE = FirstTestWorkAgliullov/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -358,7 +354,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U2N97D98Q8;
 				INFOPLIST_FILE = FirstTestWorkAgliullov/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
