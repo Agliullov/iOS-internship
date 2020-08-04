@@ -10,19 +10,32 @@ import Foundation
 
 class NetworkDataFetcher {
   
-  var networkService = NetworkService()
+  static let shared: NetworkDataFetcher = {
+    return NetworkDataFetcher()
+  }()
   
-  init(networkService: NetworkService = NetworkService()) {
-    self.networkService = networkService
-  }
+//  func getDataSourceFromJSON<T: Codable>(fileName: String) -> [T]? {
+//    if let url = Bundle.main.url(forResource: fileName, withExtension: "json") {
+//      do {
+//        let data = try Data(contentsOf: url)
+//        let objects = self.decodeJSONData(type: [T].self, from: data)
+//        return objects
+//      } catch {
+//        print("Error! Unable to parse \(fileName).json")
+//      }
+//    }
+//    return nil
+//  }
   
-  func dataFetcher(urlString: String){
-    networkService.request(urlString: urlString) { (data, error) in
-      let decoder = JSONDecoder()
-      guard let data = data else { return }
-      let response = try? decoder.decode([Events].self, from: data)
-      print(response)
+  func decodeJSONData<T: Codable>(type: T.Type, from: Data?) -> T? {
+    let decoder = JSONDecoder()
+    guard let data = from else { return nil }
+    do {
+      let objects = try decoder.decode(type.self, from: data)
+      return objects
+    } catch let jsonError {
+      print("Failed to decode JSON", jsonError)
+      return nil
     }
   }
-  
 }

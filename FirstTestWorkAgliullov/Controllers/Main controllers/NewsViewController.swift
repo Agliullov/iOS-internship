@@ -9,10 +9,10 @@
 import UIKit
 
 class NewsViewController: UIViewController {
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.title = "Новости"
-        self.view.backgroundColor = UIColor.yellow
-    }
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    self.title = "Новости"
+    self.view.backgroundColor = UIColor.yellow
+  }
 }

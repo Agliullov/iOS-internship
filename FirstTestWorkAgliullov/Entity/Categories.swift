@@ -7,3 +7,11 @@
 //
 
 import Foundation
+
+struct Categories: Codable {
+  let id: Int64
+  let primaryKey: String
+  
+  let title: String
+  let imageName: String
+}

@@ -15,10 +15,18 @@ class StartViewController: UITabBarController, UITabBarControllerDelegate {
   override func viewDidLoad() {
     super.viewDidLoad()
     self.delegate = self
-    UITabBar.appearance().barTintColor = UIColor.white
-    UITabBar.appearance().tintColor = GREEN_COLOR
-    UINavigationBar.appearance().barTintColor = GREEN_COLOR
-    UINavigationBar.appearance().tintColor = UIColor.white
+    if #available(iOS 13.0, *) {
+      UITabBar.appearance().barTintColor = UIColor.white
+      UITabBar.appearance().tintColor = GREEN_COLOR
+      UINavigationBar.appearance().barTintColor = GREEN_COLOR
+      UINavigationBar.appearance().tintColor = UIColor.white
+    } //else {
+//      UITabBar.appearance().backgroundColor = UIColor.white
+//      UITabBar.appearance().tintColor = GREEN_COLOR
+//      UINavigationBar.appearance().backgroundColor = GREEN_COLOR
+//      UINavigationBar.appearance().tintColor = UIColor.white
+//    }
+    
     self.setSelectedIndex()
     self.setCenterButton()
   }
@@ -46,7 +54,7 @@ class StartViewController: UITabBarController, UITabBarControllerDelegate {
     
     self.view.addSubview(borderLine)
     self.view.addSubview(self.centerButton)
-    self.view.layoutIfNeeded()
+    //self.view.layoutIfNeeded()
   }
   
   @objc func setSelectedIndex() {
@@ -59,7 +67,6 @@ class StartViewController: UITabBarController, UITabBarControllerDelegate {
       self.centerButton.backgroundColor = GREEN_COLOR
     } else {
       self.centerButton.backgroundColor = RED_COLOR
-      
     }
   }
 }

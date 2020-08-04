@@ -6,4 +6,17 @@
 //  Copyright © 2020 Ильдар Аглиуллов. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class StaffHelpViewController: UIViewController {
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    self.title = "Помощь вещами"
+    self.tabBarItem.image = UIImage(named: "shirt")
+    UITabBar.appearance().tintColor = GREEN_COLOR
+    
+    self.view.backgroundColor = UIColor.gray
+  }
+}
+

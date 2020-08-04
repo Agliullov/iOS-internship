@@ -40,7 +40,7 @@ class EventTableViewCell: UITableViewCell { //Благотворительные
     label.translatesAutoresizingMaskIntoConstraints = false
     label.textAlignment = .center
     label.numberOfLines = 0
-    label.textColor = UIColor(red: 98 / 255, green: 127 / 255, blue: 143 / 255, alpha: 1.0)
+    label.textColor = IMAGE_COLOR
     label.font = UIFont.boldSystemFont(ofSize: 21.0)
     return label
   }()
@@ -65,7 +65,7 @@ class EventTableViewCell: UITableViewCell { //Благотворительные
   private var bottomButtonView: UIView = {
     let view = UIView()
     view.translatesAutoresizingMaskIntoConstraints = false
-    view.backgroundColor = UIColor(red: 102 / 255, green: 166 / 255, blue: 54 / 255, alpha: 1.0)
+    view.backgroundColor = GREEN_COLOR
     
     let imageView = UIImageView()
     imageView.translatesAutoresizingMaskIntoConstraints = false
