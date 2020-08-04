@@ -27,6 +27,9 @@ struct CategoryDataSourse{
 }
 
 class HelpViewController: UIViewController {
+  
+  fileprivate var categories: Categories
+  fileprivate var events: Events
     
     @IBOutlet weak var helpCenterCollectionView: UICollectionView!
     
@@ -54,6 +57,14 @@ class HelpViewController: UIViewController {
     @objc func exitApp() {
         UIControl().sendAction(#selector((NSXPCConnection.suspend)), to: UIApplication.shared, for: nil)
     }
+  
+  @objc fileprivate func openDetailsEvent(event: Events?) {
+      guard let eventDetails = event else { return }
+      
+      let detailsTaskVC = AGLDetailsTaskViewController()
+      detailsTaskVC.task = taskDetails
+      self.navigationController?.pushViewController(detailsTaskVC, animated: true)
+  }
 }
 
 extension HelpViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
@@ -85,4 +96,15 @@ extension HelpViewController: UICollectionViewDataSource, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: self.view.bounds.width, height: COLLECTION_HEADER_HEIGHT)
     }
+  
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    let section = self.dataSourse[indexPath.section]
+    let cellType = section.self
+    if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellIdentifier, for: indexPath) as? CategoryCollectionCell {
+      
+      
+    }
+    
+    collectionView.deselectItem(at: indexPath, animated: true)
+  }
 }
