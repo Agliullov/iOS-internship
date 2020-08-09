@@ -9,58 +9,63 @@
 import UIKit
 
 class DetailsInfoDefaultCell: DefaultGridViewBlockCell {
-  
-  var defaultImageView: UIImageView = {
-    let imageView = UIImageView()
-    imageView.translatesAutoresizingMaskIntoConstraints = false
-    imageView.tintColor = IMAGE_COLOR
-    return imageView
-  }()
-  
-  var defaultTitleLabel: UILabel = {
-    let label = UILabel()
-    label.textAlignment = .left
-    label.font = UIFont.systemFont(ofSize: 11.0)
-    label.numberOfLines = 0
-    label.translatesAutoresizingMaskIntoConstraints = false
-    label.backgroundColor = .clear
-    return label
-  }()
-  
-  override func initialSetup() {
-    super.initialSetup()
     
-    self.contentView.addSubview(self.defaultImageView)
-    self.contentView.addSubview(self.defaultTitleLabel)
+    private let defaultImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.tintColor = UIColor.imageColor
+        return imageView
+    }()
     
-    let constraints: [NSLayoutConstraint] = [
-      self.defaultImageView.topAnchor.constraint(equalTo: self.contentView.topAnchor),
-      self.defaultImageView.leftAnchor.constraint(equalTo: self.contentView.layoutMarginsGuide.leftAnchor),
-      self.defaultImageView.widthAnchor.constraint(equalToConstant: 15.0),
-      self.defaultImageView.heightAnchor.constraint(equalToConstant: 15.0),
-      
-      self.defaultTitleLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor),
-      self.defaultTitleLabel.leftAnchor.constraint(equalTo: self.defaultImageView.rightAnchor, constant: 10.0),
-      self.contentView.layoutMarginsGuide.rightAnchor.constraint(equalTo: self.defaultTitleLabel.rightAnchor),
-      self.contentView.bottomAnchor.constraint(equalTo: self.defaultTitleLabel.bottomAnchor)
-    ]
+    private let defaultTitleLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
+        label.font = UIFont.systemFont(ofSize: 11.0)
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.backgroundColor = .clear
+        return label
+    }()
     
-    NSLayoutConstraint.activate(constraints)
-  }
-  
-  func setup(imageName: String, titles: [String]) {
-    if let image = UIImage(named: imageName)?.withRenderingMode(.alwaysTemplate) {
-      if #available(iOS 13.0, *) {
-        self.defaultImageView.image = image
-      }
-      self.defaultImageView.image = image
+    override func initialSetup() {
+        super.initialSetup()
+        
+        contentView.addSubview(defaultImageView)
+        contentView.addSubview(defaultTitleLabel)
+        
+        let constraints: [NSLayoutConstraint] = [
+            //defaultImageView
+            defaultImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            defaultImageView.leftAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leftAnchor),
+            defaultImageView.widthAnchor.constraint(equalToConstant: 15.0),
+            defaultImageView.heightAnchor.constraint(equalToConstant: 15.0),
+            
+            //defaultTitleLabel
+            defaultTitleLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
+            defaultTitleLabel.leftAnchor.constraint(equalTo: defaultImageView.rightAnchor, constant: 10.0),
+            contentView.layoutMarginsGuide.rightAnchor.constraint(equalTo: defaultTitleLabel.rightAnchor),
+            contentView.bottomAnchor.constraint(equalTo: defaultTitleLabel.bottomAnchor)
+        ]
+        
+        NSLayoutConstraint.activate(constraints)
     }
     
-    var titlesJoinded: String = ""
-    for title in titles {
-      titlesJoinded += "\(title) \n"
+    func setup(imageName: String, titles: [String], textColor: UIColor, font: UIFont?, attributedText: NSMutableAttributedString?) {
+        if let image = UIImage(named: imageName)?.withRenderingMode(.alwaysTemplate) {
+            defaultImageView.image = image
+        }
+        
+        var titlesJoinded: String = ""
+        for title in titles {
+            titlesJoinded += "\(title) \n"
+        }
+        
+        defaultTitleLabel.text = titlesJoinded
+        
+        guard let font = font else { return }
+        defaultTitleLabel.font = font
+        
+        guard let attrText = attributedText else { return }
+        defaultTitleLabel.attributedText = attrText
     }
-    
-    self.defaultTitleLabel.text = titlesJoinded
-  }
 }

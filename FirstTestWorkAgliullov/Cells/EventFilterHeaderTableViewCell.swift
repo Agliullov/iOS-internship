@@ -9,35 +9,39 @@
 import UIKit
 
 class EventFilterHeaderTableViewCell: UITableViewHeaderFooterView { //Заголовок фильтра
-  
-  var titleLabel: UILabel = {
-    let label = UILabel()
-    label.translatesAutoresizingMaskIntoConstraints = false
-    label.textColor = .black
-    label.textAlignment = .left
-    return label
-  }()
-  
-  override init(reuseIdentifier: String?) {
-    super.init(reuseIdentifier: reuseIdentifier)
-    self.initSetup()
-  }
-  
-  required init?(coder: NSCoder) {
-    super.init(coder: coder)
-    self.initSetup()
-  }
-  
-  private func initSetup() {
-    self.contentView.addSubview(self.titleLabel)
     
-    let constraints: [NSLayoutConstraint] = [
-      self.titleLabel.leftAnchor.constraint(equalTo: self.contentView.layoutMarginsGuide.leftAnchor),
-      self.titleLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 20),
-      self.contentView.layoutMarginsGuide.rightAnchor.constraint(equalTo: self.titleLabel.rightAnchor),
-      self.contentView.bottomAnchor.constraint(equalTo: self.titleLabel.bottomAnchor, constant: 20)
-    ]
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .black
+        label.textAlignment = .left
+        return label
+    }()
     
-    NSLayoutConstraint.activate(constraints)
-  }
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
+        initSetup()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        initSetup()
+    }
+    
+    private func initSetup() {
+        contentView.addSubview(titleLabel)
+        
+        let constraints: [NSLayoutConstraint] = [
+            titleLabel.leftAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leftAnchor),
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
+            contentView.layoutMarginsGuide.rightAnchor.constraint(equalTo: titleLabel.rightAnchor),
+            contentView.bottomAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20)
+        ]
+        
+        NSLayoutConstraint.activate(constraints)
+    }
+    
+    func setup(textHeader: String) {
+        titleLabel.text = textHeader
+    }
 }

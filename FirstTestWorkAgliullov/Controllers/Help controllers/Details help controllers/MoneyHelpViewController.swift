@@ -9,14 +9,14 @@
 import UIKit
 
 class MoneyHelpViewController: UIViewController {
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    self.title = "Помощь деньгами"
-    self.tabBarItem.image = UIImage(named: "coins")
-    UITabBar.appearance().tintColor = GREEN_COLOR
     
-    self.view.backgroundColor = UIColor.blue
-  }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        title = "Помощь деньгами"
+        tabBarItem.image = UIImage(named: "coins")
+        UITabBar.appearance().tintColor = UIColor.greenColor
+        
+        view.backgroundColor = UIColor.blue
+    }
 }
 

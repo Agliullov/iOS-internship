@@ -9,14 +9,14 @@
 import UIKit
 
 class VolunteerViewController: UIViewController {
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    self.title = "Стать волонтером"
-    self.tabBarItem.image = UIImage(named: "hands")
-    UITabBar.appearance().tintColor = GREEN_COLOR
     
-    self.view.backgroundColor = UIColor.red
-  }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        title = "Стать волонтером"
+        tabBarItem.image = UIImage(named: "hands")
+        UITabBar.appearance().tintColor = UIColor.greenColor
+        
+        view.backgroundColor = UIColor.red
+    }
 }
 

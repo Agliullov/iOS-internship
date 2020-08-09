@@ -9,34 +9,38 @@
 import UIKit
 
 class DefaultSingleInfoCell: DefaultGridViewBlockCell {
-  
-  var defaultLabel: UILabel = {
-    let label = UILabel()
-    label.translatesAutoresizingMaskIntoConstraints = false
-    label.numberOfLines = 0
-    label.textAlignment = .left
-    label.backgroundColor = .clear
-    return label
-  }()
-  
-  override func initialSetup() {
-    super.initialSetup()
     
-    self.contentView.addSubview(self.defaultLabel)
+    private let defaultLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
+        label.textAlignment = .left
+        label.backgroundColor = .clear
+        return label
+    }()
     
-    let constraints: [NSLayoutConstraint] = [
-      self.defaultLabel.topAnchor.constraint(equalTo: self.contentView.layoutMarginsGuide.topAnchor),
-      self.defaultLabel.leftAnchor.constraint(equalTo: self.contentView.layoutMarginsGuide.leftAnchor),
-      self.contentView.layoutMarginsGuide.bottomAnchor.constraint(equalTo: self.defaultLabel.bottomAnchor),
-      self.contentView.layoutMarginsGuide.rightAnchor.constraint(equalTo: self.defaultLabel.rightAnchor),
-      self.defaultLabel.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.size.width * 0.7)
-    ]
+    override func initialSetup() {
+        super.initialSetup()
+        
+        contentView.addSubview(defaultLabel)
+        
+        let constraints: [NSLayoutConstraint] = [
+            defaultLabel.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor),
+            defaultLabel.leftAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leftAnchor),
+            contentView.layoutMarginsGuide.bottomAnchor.constraint(equalTo: defaultLabel.bottomAnchor),
+            contentView.layoutMarginsGuide.rightAnchor.constraint(equalTo: defaultLabel.rightAnchor),
+            defaultLabel.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.size.width * 0.7)
+        ]
+        
+        NSLayoutConstraint.activate(constraints)
+    }
     
-    NSLayoutConstraint.activate(constraints)
-  }
-  
-  func setup(title: String) {
-    self.defaultLabel.text = title
-    self.setNeedsLayout()
-  }
+    func setup(title: String, textColor: UIColor, font: UIFont, attributedText: NSMutableAttributedString?) {
+        defaultLabel.text = title
+        defaultLabel.textColor = textColor
+        defaultLabel.font = font
+        
+        guard let attrText = attributedText else { return }
+        defaultLabel.attributedText = attrText
+    }
 }

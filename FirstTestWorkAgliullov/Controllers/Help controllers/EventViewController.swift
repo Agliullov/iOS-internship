@@ -9,174 +9,169 @@
 import UIKit
 
 class EventViewController: UIViewController {
-  
-  fileprivate let filters: [FilterViewControllerDataSourse] = FilterViewControllerDataSourse.dataSourse()
-  
-  fileprivate var sections: [Events] = []
-  
-  var mutableFilters: [FilterViewControllerDataSourse] = []
-  
-  var categoryEnum: CategoryEnum = .Default
-  
-  var navigationTitle: String?
-  
-  var segmentControl: UISegmentedControl!
-  
-  private let tableView: UITableView = {
-    let tableView = UITableView(frame: .zero, style: .plain)
-    tableView.translatesAutoresizingMaskIntoConstraints = false
     
-    if #available(iOS 13.0, *) {
-      tableView.backgroundColor = UIColor.secondarySystemGroupedBackground
-    } else {
-      tableView.backgroundColor = UIColor.gray
-    }
+    private var filters: [FiltersEntity] = []
     
-    tableView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-    tableView.separatorInset = UIEdgeInsets(top: 0, left: UIScreen.main.bounds.size.width, bottom: 0, right: 0)
+    private var sections: [EventsEntity] = []
     
-    tableView.register(EventTableViewCell.self, forCellReuseIdentifier: String(describing: EventTableViewCell.self))
+    var mutableFilters: [FiltersEntity] = []
     
-    return tableView
-  }()
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
+    var categoryEnum: CategoryEnum = .Default
     
-    self.view.backgroundColor = UIColor.white
-    self.setupSegmentControl()
-    self.title = self.navigationTitle
-    self.view.addSubview(self.tableView)
+    var navigationTitle: String?
     
-    self.tableView.dataSource = self
-    self.tableView.delegate = self
+    private let dataService = DataService()
     
-    self.categoryChange(category: self.categoryEnum)
+    private var segmentControl: UISegmentedControl!
     
-    NSLayoutConstraint.activate([
-      self.tableView.topAnchor.constraint(equalTo: self.segmentControl.bottomAnchor, constant: 8.0),
-      self.tableView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
-      self.view.rightAnchor.constraint(equalTo: self.tableView.rightAnchor),
-      self.view.bottomAnchor.constraint(equalTo: self.tableView.bottomAnchor)
-    ])
-    
-    self.navigationItem.setHidesBackButton(true, animated: true)
-    self.navigationItem.setLeftBarButton(UIBarButtonItem(image: UIImage(named: "rectangle"), style: .done, target: self, action: #selector(backVC)), animated: true)
-    self.navigationItem.setRightBarButton(UIBarButtonItem(image: UIImage(named: "filterIcon"), style: .done, target: self, action: #selector(filterEventVC)), animated: true)
-  }
-  
-  func getDataSourceFromJSON(filename fileName: String) {
-    if let url = Bundle.main.url(forResource: fileName, withExtension: "json") {
-      do {
-        let data = try Data(contentsOf: url)
-        let events = NetworkDataFetcher.shared.decodeJSONData(type: [Events].self, from: data)
-        if let events = events {
-          self.sections = events
+    private let tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .plain)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        if #available(iOS 13.0, *) {
+            tableView.backgroundColor = UIColor.secondarySystemGroupedBackground
+        } else {
+            tableView.backgroundColor = UIColor.likesGrayColor
         }
-      } catch {
-        print("Error! Unable to parse \(fileName).json")
-      }
-    }
-  }
-  
-  func setupSegmentControl() {
-    var height: CGFloat = 0
-    if let navigationBarMaxY = self.navigationController?.navigationBar.frame.maxY {
-      height = navigationBarMaxY + 10.0
+        
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: UIScreen.main.bounds.size.width, bottom: 0, right: 0)
+        
+        tableView.register(EventTableViewCell.self, forCellReuseIdentifier: String(describing: EventTableViewCell.self))
+        
+        return tableView
+    }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        view.backgroundColor = UIColor.white
+        setupSegmentControl()
+        title = navigationTitle
+        view.addSubview(tableView)
+        
+        tableView.dataSource = self
+        tableView.delegate = self
+        
+        categoryChange(category: categoryEnum)
+        
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: segmentControl.bottomAnchor, constant: 8.0),
+            tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            view.rightAnchor.constraint(equalTo: tableView.rightAnchor),
+            view.bottomAnchor.constraint(equalTo: tableView.bottomAnchor)
+        ])
+        
+        navigationItem.setHidesBackButton(true, animated: true)
+        navigationItem.setLeftBarButton(UIBarButtonItem(image: UIImage(named: "rectangle"), style: .done, target: self, action: #selector(backVC)), animated: true)
+        navigationItem.setRightBarButton(UIBarButtonItem(image: UIImage(named: "filterIcon"), style: .done, target: self, action: #selector(filterEventVC)), animated: true)
+        
+        dataService.getEventFilters { (filters) in
+            self.filters = filters!
+        }
+        
     }
     
-    self.segmentControl = UISegmentedControl(frame: CGRect(x: 8, y: height, width: self.view.frame.width - 16, height: 30))
-    self.segmentControl?.insertSegment(withTitle: "Текущие", at: 0, animated: false)
-    self.segmentControl?.insertSegment(withTitle: "Завершенные", at: 1, animated: false)
-    
-    self.segmentControl?.selectedSegmentIndex = 0
-    
-    if #available(iOS 13.0, *) {
-      self.segmentControl.selectedSegmentTintColor = GREEN_COLOR
-    } else {
-      self.segmentControl?.backgroundColor = GREEN_COLOR
+    func setupSegmentControl() {
+        var height: CGFloat = 0
+        if let navigationBarMaxY = self.navigationController?.navigationBar.frame.maxY {
+            height = navigationBarMaxY + 10.0
+        }
+        
+        segmentControl = UISegmentedControl(frame: CGRect(x: 8, y: height, width: view.frame.width - 16, height: 30))
+        segmentControl?.insertSegment(withTitle: "Текущие", at: 0, animated: false)
+        segmentControl?.insertSegment(withTitle: "Завершенные", at: 1, animated: false)
+        
+        segmentControl?.selectedSegmentIndex = 0
+        
+        if #available(iOS 13.0, *) {
+            self.segmentControl.selectedSegmentTintColor = UIColor.greenColor
+        } else {
+            //self.segmentControl?.tintColor = UIColor.greenColor
+        }
+        
+        segmentControl.layer.borderWidth = 1.0
+        segmentControl.layer.borderColor = UIColor.greenColor.cgColor
+        segmentControl.tintColor = UIColor.greenColor
+        
+        segmentControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: UIControl.State.selected)
+        segmentControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.greenColor], for: UIControl.State.normal)
+        view.addSubview(segmentControl!)
     }
     
-    self.segmentControl.layer.borderWidth = 1.0
-    self.segmentControl.layer.borderColor = GREEN_COLOR.cgColor
-    self.segmentControl.tintColor = GREEN_COLOR
     
-    self.segmentControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: UIControl.State.selected)
-    self.segmentControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: GREEN_COLOR], for: UIControl.State.normal)
-    self.view.addSubview(self.segmentControl!)
-  }
-  
-  
-  func categoryChange(category: CategoryEnum) {
-    switch category {
-    case .Kids:
-      self.getDataSourceFromJSON(filename: "kids_events")
-    case .Adults:()
-      
-    case .Elderly:()
-      
-    case .Animals:()
-      
-    case .Events:()
-      
-    case .Default:()
+    func categoryChange(category: CategoryEnum) {
+        switch category {
+        case .Kids:
+            dataService.getEventKids { (events) in
+                self.sections = events!
+            }
+        case .Adults:()
+            
+        case .Elderly:()
+            
+        case .Animals:()
+            
+        case .Events:()
+            
+        case .Default:()
+        }
     }
-  }
-  
-  fileprivate func openDetailsEvent(event: Events) {
-    let detailsEventVC = DetailsEventViewController()
-    detailsEventVC.event = event
-    detailsEventVC.navigationTitle = event.eventTitle
-    self.navigationController?.pushViewController(detailsEventVC, animated: true)
-  }
-  
-  @objc fileprivate func backVC() {
-    self.navigationController?.popViewController(animated: true)
-  }
-  
-  @objc fileprivate func filterEventVC() {
-    let filterEventVC = HelpFilterViewController()
-    filterEventVC.delegate = self
-    if !self.mutableFilters.isEmpty {
-      filterEventVC.filters = self.mutableFilters
-    } else {
-      filterEventVC.filters = self.filters
+    
+    fileprivate func openDetailsEvent(event: EventsEntity) {
+        let detailsEventVC = DetailsEventViewController()
+        detailsEventVC.events = event
+        detailsEventVC.navigationTitle = event.eventTitle
+        navigationController?.pushViewController(detailsEventVC, animated: true)
     }
-    self.navigationController?.pushViewController(filterEventVC, animated: true)
-  }
+    
+    @objc fileprivate func backVC() {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @objc fileprivate func filterEventVC() {
+        let filterEventVC = HelpFilterViewController()
+        filterEventVC.delegate = self
+        if !mutableFilters.isEmpty {
+            filterEventVC.filters = mutableFilters
+        } else {
+            filterEventVC.filters = filters
+        }
+        navigationController?.pushViewController(filterEventVC, animated: true)
+    }
 }
 
 extension EventViewController: UITableViewDataSource {
-  
-  func numberOfSections(in tableView: UITableView) -> Int {
-    return 1
-  }
-  
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return self.sections.count
-  }
-  
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: EventTableViewCell.self)) as? EventTableViewCell else { return UITableViewCell() }
-    let event = self.sections[indexPath.row]
-    cell.setup(event: event)
-    return cell
-  }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return sections.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: EventTableViewCell.self)) as? EventTableViewCell else { return UITableViewCell() }
+        let event = sections[indexPath.row]
+        cell.setup(event: event)
+        cell.selectionStyle = .none
+        return cell
+    }
 }
 
 extension EventViewController: UITableViewDelegate {
-  
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    tableView.deselectRow(at: indexPath, animated: true)
-    let section = self.sections[indexPath.row]
-    self.openDetailsEvent(event: section)
-  }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+       // tableView.deselectRow(at: indexPath, animated: true)
+        let section = sections[indexPath.row]
+        openDetailsEvent(event: section)
+    }
 }
 
 extension EventViewController: FilterStructChange {
-  
-  func filterValueDidChange(filter: [FilterViewControllerDataSourse]?) {
-    guard let filter = filter else { return }
-    self.mutableFilters = filter
-  }
+    
+    func filterValueDidChange(filter: [FiltersEntity]?) {
+        guard let filter = filter else { return }
+        mutableFilters = filter
+    }
 }

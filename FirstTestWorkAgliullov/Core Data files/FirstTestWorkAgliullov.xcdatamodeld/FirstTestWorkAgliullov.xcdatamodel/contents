@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19G73" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Categories" representedClassName="Categories" syncable="YES" codeGenerationType="class">
+        <attribute name="id" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="imageName" attributeType="String"/>
+        <attribute name="primaryKey" attributeType="String"/>
+        <attribute name="title" attributeType="String"/>
+    </entity>
+    <entity name="Events" representedClassName="Events" syncable="YES" codeGenerationType="class">
+        <attribute name="eventImageView" attributeType="String"/>
+        <attribute name="eventTitle" attributeType="String"/>
+        <attribute name="id" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="timeLabel" attributeType="String"/>
+        <attribute name="topDescriptionLabel" attributeType="String"/>
+        <relationship name="detailsInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EventsDetailsInfo" inverseName="events" inverseEntity="EventsDetailsInfo"/>
+    </entity>
+    <entity name="EventsDetailsInfo" representedClassName="EventsDetailsInfo" syncable="YES" codeGenerationType="class">
+        <attribute name="bottomDescriptionLabel" attributeType="String"/>
+        <attribute name="bottomLinkLabel" attributeType="String"/>
+        <attribute name="centerDescriptionLabel" attributeType="String"/>
+        <attribute name="eventAddress" attributeType="String"/>
+        <attribute name="likesCountLabel" attributeType="String"/>
+        <attribute name="organizationName" attributeType="String"/>
+        <attribute name="serviceLabel" attributeType="String"/>
+        <attribute name="topLinkLabel" attributeType="String"/>
+        <relationship name="eventPhoneNumber" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="EventsPhoneNumberCollection" inverseName="phoneNumber" inverseEntity="EventsPhoneNumberCollection"/>
+        <relationship name="events" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Events" inverseName="detailsInfo" inverseEntity="Events"/>
+        <relationship name="imageCollection" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="EventsImageEventCollection" inverseName="imageCollection" inverseEntity="EventsImageEventCollection"/>
+        <relationship name="likesImageNames" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="EventsLikesImageNames" inverseName="likesImageNames" inverseEntity="EventsLikesImageNames"/>
+    </entity>
+    <entity name="EventsImageEventCollection" representedClassName="EventsImageEventCollection" syncable="YES" codeGenerationType="class">
+        <attribute name="imageName" attributeType="Transformable" customClassName="[String]"/>
+        <relationship name="imageCollection" maxCount="1" deletionRule="Nullify" destinationEntity="EventsDetailsInfo" inverseName="imageCollection" inverseEntity="EventsDetailsInfo"/>
+    </entity>
+    <entity name="EventsLikesImageNames" representedClassName="EventsLikesImageNames" syncable="YES" codeGenerationType="class">
+        <attribute name="imageName" attributeType="Transformable" customClassName="[String]"/>
+        <relationship name="likesImageNames" maxCount="1" deletionRule="Nullify" destinationEntity="EventsDetailsInfo" inverseName="likesImageNames" inverseEntity="EventsDetailsInfo"/>
+    </entity>
+    <entity name="EventsPhoneNumberCollection" representedClassName="EventsPhoneNumberCollection" syncable="YES" codeGenerationType="class">
+        <attribute name="number" attributeType="Transformable" customClassName="[String]"/>
+        <relationship name="phoneNumber" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EventsDetailsInfo" inverseName="eventPhoneNumber" inverseEntity="EventsDetailsInfo"/>
+    </entity>
+    <entity name="Filters" representedClassName="Filters" syncable="YES" codeGenerationType="class">
+        <attribute name="id" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="isOn" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="text" attributeType="String"/>
+    </entity>
+    <elements>
+        <element name="Categories" positionX="-267.87890625" positionY="-87.4609375" width="128" height="103"/>
+        <element name="Events" positionX="220.30078125" positionY="-100.6796875" width="128" height="133"/>
+        <element name="Filters" positionX="-267.1640625" positionY="58.29296875" width="128" height="88"/>
+        <element name="EventsDetailsInfo" positionX="-23.3515625" positionY="-85.328125" width="128" height="223"/>
+        <element name="EventsPhoneNumberCollection" positionX="185.4609375" positionY="-279.15625" width="128" height="73"/>
+        <element name="EventsImageEventCollection" positionX="219.05859375" positionY="110.1640625" width="128" height="73"/>
+        <element name="EventsLikesImageNames" positionX="198.79296875" positionY="241.171875" width="128" height="73"/>
+    </elements>
+</model>
