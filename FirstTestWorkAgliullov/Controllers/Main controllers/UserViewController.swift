@@ -9,10 +9,10 @@
 import UIKit
 
 class UserViewController: UIViewController {
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    self.title = "Профиль"
-    self.view.backgroundColor = UIColor.gray
-  }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        title = "Профиль"
+        view.backgroundColor = UIColor.gray
+    }
 }

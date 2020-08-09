@@ -9,10 +9,10 @@
 import UIKit
 
 class HistoryViewController: UIViewController {
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    self.title = "История"
-    self.view.backgroundColor = UIColor.orange
-  }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        title = "История"
+        view.backgroundColor = UIColor.orange
+    }
 }

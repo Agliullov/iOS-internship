@@ -9,10 +9,10 @@
 import UIKit
 
 class SearchViewController: UIViewController {
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    self.title = "Поиск"
-    self.view.backgroundColor = UIColor.purple
-  }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        title = "Поиск"
+        view.backgroundColor = UIColor.purple
+    }
 }

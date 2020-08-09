@@ -9,63 +9,62 @@
 import UIKit
 
 class CategoryCollectionCell: UICollectionViewCell { //Категории помощи
-  
-  private let screenFrame: CGSize = UIScreen.main.bounds.size
-  
-  var titleImageView: UIImageView = {
-    let imageView = UIImageView()
-    imageView.translatesAutoresizingMaskIntoConstraints = false
-    imageView.contentMode = .center
-    return imageView
-  }()
-  
-  var titleTextLabel: UILabel = {
-    let label = UILabel()
-    label.translatesAutoresizingMaskIntoConstraints = false
-    label.textAlignment = .center
-    label.font = UIFont.boldSystemFont(ofSize: 15.0)
-    label.textColor = GREEN_COLOR
-    return label
-  }()
-  
-  override init(frame: CGRect) {
-    super.init(frame: frame)
-    self.initSetup()
-  }
-  
-  required init?(coder: NSCoder) {
-    super.init(coder: coder)
-    self.initSetup()
-  }
-  
-  fileprivate func initSetup(){
-    self.contentView.backgroundColor = UIColor(red: 234 / 255, green: 237 / 255, blue: 232 / 255, alpha: 1.0)
-    self.contentView.addSubview(titleImageView)
-    self.contentView.addSubview(titleTextLabel)
     
-    let constraints: [NSLayoutConstraint] = [
-      //titleImageView
-      self.titleImageView.heightAnchor.constraint(equalToConstant: self.screenFrame.height / 5),
-      self.titleImageView.widthAnchor.constraint(equalToConstant: self.screenFrame.width / 2.2),
-      self.titleImageView.topAnchor.constraint(equalTo: self.contentView.topAnchor),
-      self.titleImageView.leftAnchor.constraint(equalTo: self.contentView.leftAnchor),
-      self.contentView.rightAnchor.constraint(equalTo: self.titleImageView.rightAnchor),
-      
-      //titleTextLabel
-      self.titleTextLabel.topAnchor.constraint(equalTo: self.titleImageView.bottomAnchor),
-      self.titleTextLabel.leftAnchor.constraint(equalTo: self.contentView.leftAnchor),
-      self.contentView.rightAnchor.constraint(equalTo: self.titleTextLabel.rightAnchor),
-      self.contentView.bottomAnchor.constraint(equalTo: self.titleTextLabel.bottomAnchor, constant: +10)
-    ]
+    private let screenFrame: CGSize = UIScreen.main.bounds.size
     
-    NSLayoutConstraint.activate(constraints)
-  }
-  
-  func setup(titleImageName: String, titleTextLabel: String) {
-    if let image = UIImage(named: titleImageName) {
-      self.titleImageView.image = image
+    private let titleImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .center
+        return imageView
+    }()
+    
+    private let titleTextLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
+        label.font = UIFont.boldSystemFont(ofSize: 15.0)
+        label.textColor = UIColor.greenColor
+        return label
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        initSetup()
     }
     
-    self.titleTextLabel.text = titleTextLabel
-  }
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        initSetup()
+    }
+    
+    fileprivate func initSetup(){
+        contentView.backgroundColor = UIColor.collectionCategoryCellColor
+        contentView.addSubview(titleImageView)
+        contentView.addSubview(titleTextLabel)
+        
+        let constraints: [NSLayoutConstraint] = [
+            //titleImageView
+            titleImageView.heightAnchor.constraint(equalToConstant: screenFrame.height / 5),
+            titleImageView.widthAnchor.constraint(equalToConstant: screenFrame.width / 2.2),
+            titleImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            titleImageView.leftAnchor.constraint(equalTo: contentView.leftAnchor),
+            contentView.rightAnchor.constraint(equalTo: titleImageView.rightAnchor),
+            
+            //titleTextLabel
+            titleTextLabel.topAnchor.constraint(equalTo: titleImageView.bottomAnchor),
+            titleTextLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor),
+            contentView.rightAnchor.constraint(equalTo: titleTextLabel.rightAnchor),
+            contentView.bottomAnchor.constraint(equalTo: titleTextLabel.bottomAnchor, constant: +10)
+        ]
+        
+        NSLayoutConstraint.activate(constraints)
+    }
+    
+    func setup(titleImageName: String, titleText: String) {
+        if let image = UIImage(named: titleImageName) {
+            titleImageView.image = image
+        }
+        titleTextLabel.text = titleText
+    }
 }

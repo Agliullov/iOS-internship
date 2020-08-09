@@ -1,32 +1,32 @@
 [
-  {
-    "id": 1,
-    "primaryKey": "Kids",
-    "title": "Дети",
-    "imageName": "Kids"
-  },
-  {
-    "id": 2,
-    "primaryKey": "Adults",
-    "title": "Взрослые",
-    "imageName": "Adults"
-  },
-  {
-    "id": 3,
-    "primaryKey": "Elderly",
-    "title": "Пожилые",
-    "imageName": "Elderly"
-  },
-  {
-    "id": 4,
-    "primaryKey": "Animals",
-    "title": "Животные",
-    "imageName": "Animals"
-  },
-  {
-    "id": 5,
-    "primaryKey": "Events",
-    "title": "Мероприятия",
-    "imageName": "Events"
-  }
+    {
+        "id": 1,
+        "primaryKey": "Kids",
+        "title": "Дети",
+        "imageName": "Kids"
+    },
+    {
+        "id": 2,
+        "primaryKey": "Adults",
+        "title": "Взрослые",
+        "imageName": "Adults"
+    },
+    {
+        "id": 3,
+        "primaryKey": "Elderly",
+        "title": "Пожилые",
+        "imageName": "Elderly"
+    },
+    {
+        "id": 4,
+        "primaryKey": "Animals",
+        "title": "Животные",
+        "imageName": "Animals"
+    },
+    {
+        "id": 5,
+        "primaryKey": "Events",
+        "title": "Мероприятия",
+        "imageName": "Events"
+    }
 ]

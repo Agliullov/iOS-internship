@@ -9,14 +9,14 @@
 import UIKit
 
 class ProfHelpViewController: UIViewController {
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    self.title = "Проф. помощь"
-    self.tabBarItem.image = UIImage(named: "tools")
-    UITabBar.appearance().tintColor = GREEN_COLOR
     
-    self.view.backgroundColor = UIColor.yellow
-  }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        title = "Проф. помощь"
+        tabBarItem.image = UIImage(named: "tools")
+        UITabBar.appearance().tintColor = UIColor.greenColor
+        
+        view.backgroundColor = UIColor.yellow
+    }
 }
 

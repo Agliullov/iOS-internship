@@ -1,5 +1,5 @@
 //
-//  Categories.swift
+//  CategoriesEntity.swift
 //  FirstTestWorkAgliullov
 //
 //  Created by Раис Аглиуллов on 27.07.2020.
@@ -8,10 +8,10 @@
 
 import Foundation
 
-struct Categories: Codable {
-  let id: Int64
-  let primaryKey: String
-  
-  let title: String
-  let imageName: String
+struct CategoriesEntity: Codable {
+    let id: Int64
+    let primaryKey: String
+    
+    let title: String
+    let imageName: String
 }
