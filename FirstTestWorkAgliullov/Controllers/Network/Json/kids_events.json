@@ -1,0 +1,80 @@
+[
+    {
+        "id": 1,
+        "eventTitle": "Спонсоры отремонтируют школу-интернат",
+        "eventImageView": "firstEvent",
+        "topDescriptionLabel": "Дубовская школа-интернат для детей с ограниченными возможностями здоровья стала первой в области …",
+        "timeLabel": "Осталось 13 дней (21.09 – 20.10)",
+        "detailsInfo": {
+            "organizationName": "Благотворительный фонд «Счастливый Мир»",
+            "eventAddress": "Санкт-Петербург, Кирочная улица, \n д. 50А, каб. 208",
+            "eventPhoneNumber": {
+                "number": [
+                    "+7 (937) 037 37-73",
+                    "+7 (937) 016 16-16"
+                ]
+            },
+            "serviceLabel": "У вас есть вопросы?",
+            "topLinkLabel": "Напишите нам",
+            "imageCollection": {
+                "imageName": [
+                    "firstImage",
+                    "secondImage",
+                    "thirdImage"
+                ]
+            },
+            "centerDescriptionLabel": "Участники и болельщики смогли весело и активно провести время на «Петербургском благотворительном марафоне» и при этом финансово поучаствовать в помощи детям.",
+            "bottomDescriptionLabel": "При этом финансово поучаствовать в помощи детям. При этом финансово поучаствовать в помощи детям.",
+            "bottomLinkLabel": "Перейти на сайт организации",
+            "likesImagesNames": {
+                "imageName": [
+                    "photo1",
+                    "photo2",
+                    "photo3",
+                    "photo4",
+                    "photo5"
+                ]
+            },
+            "likesCountLabel": "+102"
+        }
+    },
+    {
+        "id": 2,
+        "eventTitle": "Конкурс по вокальному пению в детском доме №6",
+        "eventImageView": "secondEvent",
+        "topDescriptionLabel": "Дубовская школа-интернат для детей с ограниченными возможностями здоровья стала первой в области …",
+        "timeLabel": "Октябрь 20, 2016",
+        "detailsInfo": {
+            "organizationName": "Благотворительный фонд «Счастливый Мир»",
+            "eventAddress": "Санкт-Петербург, Кирочная улица, \n д. 50А, каб. 208",
+            "eventPhoneNumber": {
+                "number": [
+                    "+7 (937) 037 37-73",
+                    "+7 (937) 016 16-16"
+                ]
+            },
+            "serviceLabel": "У вас есть вопросы?",
+            "topLinkLabel": "Напишите нам",
+            "imageCollection": {
+                "imageName": [
+                    "secondEvent",
+                    "secondImage",
+                    "thirdImage"
+                ]
+            },
+            "centerDescriptionLabel": "Участники и болельщики смогли весело и активно провести время на «Петербургском благотворительном марафоне» и при этом финансово поучаствовать в помощи детям.",
+            "bottomDescriptionLabel": "При этом финансово поучаствовать в помощи детям. При этом финансово поучаствовать в помощи детям.",
+            "bottomLinkLabel": "Перейти на сайт организации",
+            "likesImagesNames": {
+                "imageName": [
+                    "photo1",
+                    "photo2",
+                    "photo3",
+                    "photo4",
+                    "photo5"
+                ]
+            },
+            "likesCountLabel": "+102"
+        }
+    }
+]

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19G73" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Categories" representedClassName="Categories" syncable="YES" codeGenerationType="class">
+        <attribute name="id" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="imageName" attributeType="String"/>
+        <attribute name="primaryKey" attributeType="String"/>
+        <attribute name="title" attributeType="String"/>
+    </entity>
+    <entity name="Events" representedClassName="Events" syncable="YES" codeGenerationType="class">
+        <attribute name="detailsInfo" attributeType="Binary"/>
+        <attribute name="eventImageView" attributeType="String"/>
+        <attribute name="eventTitle" attributeType="String"/>
+        <attribute name="id" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="timeLabel" attributeType="String"/>
+        <attribute name="topDescriptionLabel" attributeType="String"/>
+    </entity>
+    <entity name="Filters" representedClassName="Filters" syncable="YES" codeGenerationType="class">
+        <attribute name="id" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="isOn" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="text" attributeType="String"/>
+    </entity>
+    <elements>
+        <element name="Categories" positionX="-267.87890625" positionY="-87.4609375" width="128" height="103"/>
+        <element name="Events" positionX="220.30078125" positionY="-100.6796875" width="128" height="133"/>
+        <element name="Filters" positionX="-267.1640625" positionY="58.29296875" width="128" height="88"/>
+    </elements>
+</model>
