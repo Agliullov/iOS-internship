@@ -22,14 +22,4 @@ struct CategoriesEntity: Codable {
         self.primaryKey = primaryKey
         self.title = title
     }
-    
-    init(snapshot: DataSnapshot) {
-        
-        let snapshotValue = snapshot.value as! [String:AnyObject]
-        
-        id = snapshotValue["id"] as! Int64
-        primaryKey = snapshotValue["primaryKey"] as! String
-        title = snapshotValue["title"] as! String
-        imageName = snapshotValue["imageName"] as! String
-    }
 }

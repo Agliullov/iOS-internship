@@ -144,57 +144,70 @@ extension DetailsEventViewController: UITableViewDataSource {
             
         case .organizationName:
             let organizationNameCell = cell as! DefaultSingleInfoCell
-            organizationNameCell.setup(title: dataSource.detailsInfo.organizationName, textColor: UIColor.grayColor, font: UIFont.systemFont(ofSize: 11.0), attributedText: nil)
+            organizationNameCell.setup(title: dataSource.detailsInfo?.organizationName ?? "", textColor: UIColor.grayColor, font: UIFont.systemFont(ofSize: 11.0), attributedText: nil)
             return organizationNameCell
             
         case .address:
             let addressCell = cell as! DetailsInfoDefaultCell
-            addressCell.setup(imageName: "navIcon", titles: [dataSource.detailsInfo.eventAddress], textColor: UIColor.grayColor, font: UIFont.systemFont(ofSize: 15.0), attributedText: nil)
+            addressCell.setup(imageName: "navIcon", titles: [dataSource.detailsInfo?.eventAddress ?? ""], textColor: UIColor.grayColor, font: UIFont.systemFont(ofSize: 15.0), attributedText: nil)
             return addressCell
             
         case .phoneNumber:
             let phoneCell = cell as! DetailsInfoDefaultCell
-            phoneCell.setup(imageName: "phoneIcon", titles: dataSource.detailsInfo.eventPhoneNumber.number, textColor: UIColor.grayColor, font: UIFont.systemFont(ofSize: 15.0), attributedText: nil)
+            phoneCell.setup(imageName: "phoneIcon", titles: dataSource.detailsInfo?.eventPhoneNumber.number ?? [], textColor: UIColor.grayColor, font: UIFont.systemFont(ofSize: 15.0), attributedText: nil)
             return phoneCell
             
         case .help:
             let helpCell = cell as! DetailsInfoDefaultCell
             
-            let attributedString = NSMutableAttributedString(string: dataSource.detailsInfo.serviceLabel + " " + dataSource.detailsInfo.topLinkLabel, attributes: [.foregroundColor : UIColor.gray])
-            attributedString.setAttributes([.underlineStyle: NSUnderlineStyle.single.rawValue], range: NSMakeRange(dataSource.detailsInfo.serviceLabel.count + 1, dataSource.detailsInfo.topLinkLabel.count))
-            attributedString.setAttributes([.foregroundColor: UIColor.greenColor], range: NSMakeRange(dataSource.detailsInfo.serviceLabel.count + 1, dataSource.detailsInfo.topLinkLabel.count))
+            if let detailsInfo = dataSource.detailsInfo {
+                let attributedString = NSMutableAttributedString(string: detailsInfo.serviceLabel + " " + detailsInfo.topLinkLabel, attributes: [.foregroundColor : UIColor.gray])
+                attributedString.setAttributes([.underlineStyle: NSUnderlineStyle.single.rawValue], range: NSMakeRange(detailsInfo.serviceLabel.count + 1, detailsInfo.topLinkLabel.count))
+                attributedString.setAttributes([.foregroundColor: UIColor.greenColor], range: NSMakeRange(detailsInfo.serviceLabel.count + 1, detailsInfo.topLinkLabel.count))
+                
+                helpCell.setup(imageName: "mailIcon", titles: [detailsInfo.serviceLabel, detailsInfo.topLinkLabel], textColor: UIColor.greenColor, font: UIFont.systemFont(ofSize: 15.0), attributedText: attributedString)
+            }
             
-            helpCell.setup(imageName: "mailIcon", titles: [dataSource.detailsInfo.serviceLabel, dataSource.detailsInfo.topLinkLabel], textColor: UIColor.greenColor, font: UIFont.systemFont(ofSize: 15.0), attributedText: attributedString)
             return helpCell
             
         case .gallery:
             let galleryCell = cell as! DefaultGalleryImageCell
-            galleryCell.setup(imageNames: dataSource.detailsInfo.imageCollection.imageName)
+            if let detailsInfo = dataSource.detailsInfo {
+                galleryCell.setup(imageNames: detailsInfo.imageCollection.imageName)
+                
+            }
             return galleryCell
             
         case .centerDescription:
             let centerDescriptionCell = cell as! DefaultSingleInfoCell
-            centerDescriptionCell.setup(title: dataSource.detailsInfo.centerDescriptionLabel, textColor: UIColor.grayColor, font: UIFont.systemFont(ofSize: 15.0), attributedText: nil)
+            if let detailsInfo = dataSource.detailsInfo {
+                centerDescriptionCell.setup(title:detailsInfo.centerDescriptionLabel, textColor: UIColor.grayColor, font: UIFont.systemFont(ofSize: 15.0), attributedText: nil)
+            }
             return centerDescriptionCell
             
         case .bottomDescription:
             let descriptionCell = cell as! DefaultSingleInfoCell
-            descriptionCell.setup(title: dataSource.detailsInfo.bottomDescriptionLabel, textColor: UIColor.grayColor, font: UIFont.systemFont(ofSize: 15.0), attributedText: nil)
+            if let detailsInfo = dataSource.detailsInfo {
+                descriptionCell.setup(title: detailsInfo.bottomDescriptionLabel, textColor: UIColor.grayColor, font: UIFont.systemFont(ofSize: 15.0), attributedText: nil)
+            }
             return descriptionCell
             
         case .organozationWebSite:
             let organozationWebSiteCell = cell as! DefaultSingleInfoCell
-            
-            let attributedString = NSMutableAttributedString(string: dataSource.detailsInfo.bottomLinkLabel, attributes: [.foregroundColor : UIColor.gray])
-            attributedString.setAttributes([.link: URL(string: "https://www.google.com")!], range: NSMakeRange(0, dataSource.detailsInfo.bottomLinkLabel.count))
-            attributedString.setAttributes([.underlineStyle: NSUnderlineStyle.single.rawValue], range: NSMakeRange(0 , dataSource.detailsInfo.bottomLinkLabel.count))
-            
-            organozationWebSiteCell.setup(title: dataSource.detailsInfo.bottomLinkLabel, textColor: UIColor.greenColor, font: UIFont.systemFont(ofSize: 15.0), attributedText: attributedString)
+            if let detailsInfo = dataSource.detailsInfo {
+                let attributedString = NSMutableAttributedString(string: detailsInfo.bottomLinkLabel, attributes: [.foregroundColor : UIColor.gray])
+                attributedString.setAttributes([.link: URL(string: "https://www.google.com")!], range: NSMakeRange(0, detailsInfo.bottomLinkLabel.count))
+                attributedString.setAttributes([.underlineStyle: NSUnderlineStyle.single.rawValue], range: NSMakeRange(0 , detailsInfo.bottomLinkLabel.count))
+                
+                organozationWebSiteCell.setup(title: detailsInfo.bottomLinkLabel, textColor: UIColor.greenColor, font: UIFont.systemFont(ofSize: 15.0), attributedText: attributedString)
+            }
             return organozationWebSiteCell
             
         case .likes:
             let likesCell = cell as! DefaultLikesCell
-            likesCell.setup(imageNames: dataSource.detailsInfo.likesImagesNames.imageName, likesCount: dataSource.detailsInfo.likesCountLabel)
+            if let detailsInfo = dataSource.detailsInfo {
+                likesCell.setup(imageNames: detailsInfo.likesImagesNames.imageName, likesCount: detailsInfo.likesCountLabel)
+            }
             return likesCell
         }
     }

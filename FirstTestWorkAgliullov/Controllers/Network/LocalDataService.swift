@@ -1,5 +1,5 @@
 //
-//  DataService.swift
+//  LocalDataService.swift
 //  FirstTestWorkAgliullov
 //
 //  Created by Раис Аглиуллов on 04.08.2020.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class DataService {
+class LocalDataService {
     
     var networkData: NetworkDataFetcher!
     
@@ -16,17 +16,17 @@ class DataService {
         self.networkData = networkData
     }
     
-    func getCategories(completion: @escaping ([CategoriesEntity]?) -> Void) {
+    func getLocalCategories(completion: @escaping ([CategoriesEntity]?) -> Void) {
         let fileName = "categories"
         networkData.getDataSourceFromJSON(fileName: fileName, response: completion)
     }
     
-    func getEventKids(completion: @escaping ([EventsEntity]?) -> Void) {
+    func getLocalEventKids(completion: @escaping ([EventsEntity]?) -> Void) {
         let fileName = "kids_events"
         networkData.getDataSourceFromJSON(fileName: fileName, response: completion)
     }
     
-    func getEventFilters(completion: @escaping ([FiltersEntity]?) -> Void) {
+    func getLocalEventFilters(completion: @escaping ([FiltersEntity]?) -> Void) {
         let fileName = "filters"
         networkData.getDataSourceFromJSON(fileName: fileName, response: completion)
     }

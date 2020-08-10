@@ -18,8 +18,6 @@ class HelpFilterViewController: UIViewController {
     
     var filters: [FiltersEntity] = []
     
-    private let dataService = DataService()
-    
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = UIColor.likesGrayImage

@@ -6,7 +6,7 @@
 //  Copyright © 2020 Ильдар Аглиуллов. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 enum ControllerMode: Int { //Check status Activity Indicator
     case viewing
