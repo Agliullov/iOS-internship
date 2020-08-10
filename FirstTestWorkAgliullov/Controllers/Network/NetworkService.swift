@@ -19,10 +19,10 @@ class NetworkService {
     }
     
     private func createDataTask(from request: URLRequest, completion: @escaping (Data?, Error?) -> Void) -> URLSessionDataTask {
-        return URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in
-            DispatchQueue.global(qos: .background).sync {
+        DispatchQueue.global(qos: .background).sync {
+            return URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in
                 completion(data, error)
-            }
-        })
+            })
+        }
     }
 }

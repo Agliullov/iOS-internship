@@ -6,9 +6,7 @@
 //  Copyright © 2020 Ильдар Аглиуллов. All rights reserved.
 //
 
-import CoreData
 import UIKit
-import Alamofire
 
 enum CategoryEnum: Int, CaseIterable { //Фильтрация по категориям
     case Kids
@@ -43,16 +41,14 @@ class HelpViewController: UIViewController {
     private let titleCellIdentifier: String = "CategoryCollectionHeaderCell"
     private let cellIdentifier: String = "HelpCenterCollectionCell"
     
-    private let dataService = DataService()
+    private let localDataService = LocalDataService()
     private let firebaseDataService = FirebaseDataService()
+    private let coreDataService = CoreDataService()
+    private let alamofireDataService = AlamofireNetworkService()
     
-    private var mode: ControllerMode = .viewing
+    private var controllerMode: ControllerMode = .viewing
     
     private var sections: [CategoriesEntity] = []
-    
-    var firebaseDataCategories: [CategoriesEntity] = []
-    
-    private var coreDataSection: [Categories] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,113 +66,72 @@ class HelpViewController: UIViewController {
         helpCenterCollectionView.register(CategoryCollectionCell.self, forCellWithReuseIdentifier: cellIdentifier)
         helpCenterCollectionView.register(CategoryCollectionHeaderCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: titleCellIdentifier)
         
-        
+        checkDataWithAlamofire()
+    }
+    
+    private func checkDataWithAlamofire() {
         self.setMode(mode: .updating)
-        if let coreData = self.fetchDataFromCoreData() {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                self.sections = coreData
-                self.setMode(mode: .viewing)
-                self.helpCenterCollectionView.reloadData()
+        alamofireDataService.getAlamofireCategories { (data, error) in
+            if let data = data, data.count != 0 {
+                DispatchQueue.main.async {
+                    self.sections = data
+                    self.helpCenterCollectionView.reloadData()
+                    self.setMode(mode: .viewing)
+                }
+            } else {
+                self.firebaseFetchService()// Check data from Firebase.getData
             }
-            
+        }
+    }
+    
+    private func firebaseFetchService() {
+        self.setMode(mode: .updating)
+        firebaseDataService.getCategoriesFirebaseData { (categories) in
+            if let categoryInFB = categories, categoryInFB.count != 0 {
+                DispatchQueue.main.async() {
+                    self.sections = categoryInFB
+                    self.helpCenterCollectionView.reloadData()
+                    self.setMode(mode: .viewing)
+                }
+            } else {
+                let alertController = UIAlertController(title: "Произошла ошибка подключения", message: "Не удалось подключиться к серверу. Данные могут быть устаревшими.", preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "ОК", style: .default, handler: nil))
+                self.present(alertController, animated: true, completion: nil)
+                self.coreDataFetchService()// Check data from CoreData
+                self.setMode(mode: .viewing)
+            }
+        }
+    }
+    
+    private func coreDataFetchService() {
+        self.setMode(mode: .updating) 
+        if let coreDataFetch = coreDataService.fetchCategoryDataFromCoreData(), coreDataFetch.count != 0 {
+            DispatchQueue.main.async() {
+                self.sections = coreDataFetch
+                self.helpCenterCollectionView.reloadData()
+                self.setMode(mode: .viewing)
+            }
         } else {
-            let _ = dataService.getCategories { categories in
-                self.saveCoreData(categories) { (category) in
-                    guard let category = category else { return }
-                    var objects: [CategoriesEntity] = []
+            let _ = localDataService.getLocalCategories { categoriesFromJSON in // Get local data and save in CoreData
+                self.coreDataService.saveCategoryDataInCoreData(categoriesFromJSON) { categoriesSaveInCoreData in
+                    guard let localCategories = categoriesSaveInCoreData else { return }
+                    var objectsCategoryEntity: [CategoriesEntity] = []
                     
-                    for categor in category {
-                        let object = CategoriesEntity(id: categor.id, primaryKey: categor.primaryKey ?? "", title: categor.title ?? "", imageName: categor.imageName ?? "")
-                        objects.append(object)
+                    for category in localCategories {
+                        let object = CategoriesEntity(id: category.id,
+                                                      primaryKey: category.primaryKey ?? "",
+                                                      title: category.title ?? "",
+                                                      imageName: category.imageName ?? "")
+                        objectsCategoryEntity.append(object)
                     }
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                        self.sections = objects
-                        self.setMode(mode: .viewing)
+                    DispatchQueue.main.async() {
+                        self.sections = objectsCategoryEntity
                         self.helpCenterCollectionView.reloadData()
                     }
-                    
                 }
+                self.setMode(mode: .viewing)
             }
         }
-        
-        //        AF.request("https://httpbin.org/get").response { response in
-        //            print(response)
-        //        }
-        
-        //        dataService.getCategories { (categories) in
-        //            self.sections = categories!
-        //        }
-        
-        //        firebaseDataService.getCategoriesFirebaseData { (categories) in
-        //            self.firebaseDataCategories = categories!
-        //
-        //            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-        //                self.sections = categories!
-        //                self.helpCenterCollectionView.reloadData()
-        //                self.setMode(mode: .viewing)
-        //            }
-        //        }
-        
-        //        firebaseDataService.getEventsFirebaseData { (events) in
-        //            print(events)
-        //        }
-        
-        //        firebaseDataService.getFiltersFirebaseData { (filters) in
-        //            print(filters)
-        //        }
-        
-    }
-    
-    func saveCoreData(_ categories: [CategoriesEntity]?, completion: @escaping ([Categories]?) -> Void) {
-        guard let categories = categories, let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-        let context = appDelegate.persistentContainer.viewContext
-        guard let entity = NSEntityDescription.entity(forEntityName: "Categories", in: context) else { return }
-        
-        var taskObjects: [Categories] = []
-        for category in categories {
-            let taskObject = NSManagedObject(entity: entity, insertInto: context) as! Categories
-            taskObject.id = category.id
-            taskObject.imageName = category.imageName
-            taskObject.primaryKey = category.primaryKey
-            taskObject.title = category.title
-            taskObjects.append(taskObject)
-        }
-        
-        do {
-            try context.save()
-            completion(taskObjects)
-            print("saved")
-        } catch {
-            print(error.localizedDescription)
-        }
-    }
-    
-    func fetchDataFromCoreData() -> [CategoriesEntity]? {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return nil }
-        let context = appDelegate.persistentContainer.viewContext
-        
-        var objects: [CategoriesEntity] = []
-        
-        do {
-            let fetchRequest : NSFetchRequest<Categories> = Categories.fetchRequest()
-            let fetchedResults = try context.fetch(fetchRequest)
-            
-            
-            for categor in fetchedResults {
-                let object = CategoriesEntity(id: categor.id, primaryKey: categor.primaryKey ?? "", title: categor.title ?? "", imageName: categor.imageName ?? "")
-                objects.append(object)
-            }
-            return objects
-        }
-        catch {
-            print ("fetch task failed", error)
-        }
-        return objects
-    }
-    
-    @objc func exitApp() {
-        UIControl().sendAction(#selector((NSXPCConnection.suspend)), to: UIApplication.shared, for: nil)
     }
     
     private func openEventsVC(section: CategoriesEntity) {
@@ -187,10 +142,18 @@ class HelpViewController: UIViewController {
         navigationController?.pushViewController(eventVC, animated: true)
     }
     
+    @objc func exitApp() {
+        UIControl().sendAction(#selector((NSXPCConnection.suspend)), to: UIApplication.shared, for: nil)
+    }
     
     //MARK: - Activity Indicator
+    private func setMode(mode: ControllerMode) {
+        self.controllerMode = mode
+        self.updateNavigationItems(animated: true)
+    }
+    
     private func updateNavigationItems(animated: Bool) {
-        switch self.mode {
+        switch self.controllerMode {
         case .viewing:
             self.navigationItem.setHidesBackButton(false, animated: animated)
             self.navigationItem.setRightBarButton(nil, animated: animated)
@@ -205,12 +168,6 @@ class HelpViewController: UIViewController {
             self.navigationItem.setHidesBackButton(true, animated: animated)
         }
     }
-    
-    private func setMode(mode: ControllerMode) {
-        self.mode = mode
-        self.updateNavigationItems(animated: true)
-    }
-    
 }
 
 extension HelpViewController: UICollectionViewDataSource {

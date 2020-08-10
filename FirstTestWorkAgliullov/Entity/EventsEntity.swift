@@ -41,5 +41,14 @@ struct EventsEntity: Codable {
     let eventImageView: String
     let topDescriptionLabel: String
     let timeLabel: String
-    let detailsInfo: DetailsInfo
+    let detailsInfo: DetailsInfo?
+    
+    init(id: Int64, eventTitle: String, eventImageView: String, topDescriptionLabel: String, timeLabel: String, detailsInfo: DetailsInfo?) {
+        self.id = id
+        self.eventTitle = eventTitle
+        self.eventImageView = eventImageView
+        self.topDescriptionLabel = topDescriptionLabel
+        self.timeLabel = timeLabel
+        self.detailsInfo = detailsInfo
+    }
 }

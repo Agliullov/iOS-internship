@@ -44,7 +44,6 @@ class DefaultLikesCell: DefaultGridViewBlockCell {
         }
         
         likesCountLabel.text = likesCount
-        
         contentView.addSubview(stackView)
         
         let constraints: [NSLayoutConstraint] = [

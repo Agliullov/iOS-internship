@@ -28,14 +28,14 @@ class NetworkDataFetcher {
     }
     
     func getDataSourceFromJSON<T: Codable>(fileName: String, response: @escaping ([T]?) -> Void) {
-        DispatchQueue.global().async {
+        DispatchQueue.main.async {
             if let url = Bundle.main.url(forResource: fileName, withExtension: "json") {
                 do {
                     let data = try Data(contentsOf: url)
                     let objects = self.decodeJSONData(type: [T].self, from: data)
                     response(objects)
                 } catch {
-                    print("Error! Unable to parse \(fileName).json")
+                    print("Failed to parse \(fileName).json")
                 }
             }
         }
@@ -48,7 +48,7 @@ class NetworkDataFetcher {
             let objects = try decoder.decode(type.self, from: data)
             return objects
         } catch let jsonError {
-            print("Failed to decode JSON", jsonError)
+            print("Failed to decode JSON: \(jsonError.localizedDescription)")
             return nil
         }
     }
