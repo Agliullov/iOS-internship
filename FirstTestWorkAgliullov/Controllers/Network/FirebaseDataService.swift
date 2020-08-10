@@ -19,7 +19,7 @@ class FirebaseDataService {
     }
     
     func getCategoriesFirebaseData(completion: @escaping ([CategoriesEntity]?) -> Void) {
-        let storeRef = Storage.storage().reference().child("/1categories.json")
+        let storeRef = Storage.storage().reference().child("/categories.json")
         storeRef.getData(maxSize: 1 * 1024 * 1024) { (data, error) in
             let objects = self.networkData.decodeJSONData(type: [CategoriesEntity].self, from: data)
             completion(objects)
@@ -27,7 +27,7 @@ class FirebaseDataService {
     }
     
     func getEventsFirebaseData(completion: @escaping ([EventsEntity]?) -> Void) {
-        let storeRef = Storage.storage().reference().child("/1kids_events.json")
+        let storeRef = Storage.storage().reference().child("/kids_events.json")
         storeRef.getData(maxSize: 1 * 1024 * 1024) { (data, error) in
             let objects = self.networkData.decodeJSONData(type: [EventsEntity].self, from: data)
             completion(objects)
