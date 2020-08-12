@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Firebase
 
 struct CategoriesEntity: Codable {
     let id: Int64
