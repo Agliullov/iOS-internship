@@ -11,11 +11,7 @@ import Alamofire
 
 class AlamofireNetworkService {
     
-    var networkData: NetworkDataFetcher!
-    
-    init(networkData: NetworkDataFetcher = NetworkDataFetcher()) {
-        self.networkData = networkData
-    }
+    var networkData: NetworkDataFetcher = NetworkDataFetcher()
     
     func getAlamofireCategories(completion: @escaping ([CategoriesEntity]?, Error?) -> Void) {
         let url = "https://firebasestorage.googleapis.com/v0/b/testworkagliullov.appspot.com/o/categories.json?alt=media&token=5cd08637-e3e4-4260-b231-9335e647ddd8"

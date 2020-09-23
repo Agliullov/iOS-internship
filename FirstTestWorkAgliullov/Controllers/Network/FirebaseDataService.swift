@@ -12,10 +12,14 @@ import FirebaseStorage
 
 class FirebaseDataService {
     
-    var networkData: NetworkDataFetcher!
+    var networkData: NetworkDataFetcher = NetworkDataFetcher()
     
-    init(networkData: NetworkDataFetcher = NetworkDataFetcher()) {
-        self.networkData = networkData
+    func getUsersFirebaseData(completion: @escaping ([UsersEntity]?) -> Void) {
+        let storeRef = Storage.storage().reference().child("/authorizationJson.json")
+        storeRef.getData(maxSize: 1 * 1024 * 1024) { (data, error) in
+            let objects = self.networkData.decodeJSONData(type: [UsersEntity].self, from: data)
+            completion(objects)
+        }
     }
     
     func getCategoriesFirebaseData(completion: @escaping ([CategoriesEntity]?) -> Void) {

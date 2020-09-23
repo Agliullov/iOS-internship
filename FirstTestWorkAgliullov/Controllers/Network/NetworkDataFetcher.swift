@@ -10,11 +10,7 @@ import Foundation
 
 class NetworkDataFetcher {
     
-    var networkService: NetworkService!
-    
-    init(networkService: NetworkService = NetworkService()) {
-        self.networkService = networkService
-    }
+    var networkService: NetworkService = NetworkService()
     
     func getDataURlFromJSON<T: Codable>(urlString: String, response: @escaping ([T]?) -> Void) {
         networkService.request(urlString: urlString) { (data, error) in

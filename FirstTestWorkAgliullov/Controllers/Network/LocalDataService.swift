@@ -10,11 +10,7 @@ import Foundation
 
 class LocalDataService {
     
-    var networkData: NetworkDataFetcher!
-    
-    init(networkData: NetworkDataFetcher = NetworkDataFetcher()) {
-        self.networkData = networkData
-    }
+    var networkData: NetworkDataFetcher = NetworkDataFetcher()
     
     func getLocalCategories(completion: @escaping ([CategoriesEntity]?) -> Void) {
         let fileName = "categories"
